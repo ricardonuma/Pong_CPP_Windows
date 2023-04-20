@@ -1,0 +1,7 @@
+﻿  win32_platform.cpp
+C:\Users\Ricardo T. F. Numa\source\repos\Pong_CPP_Windows\Pong_CPP_Windows\renderer.cpp(58,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+C:\Users\Ricardo T. F. Numa\source\repos\Pong_CPP_Windows\Pong_CPP_Windows\renderer.cpp(59,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+C:\Users\Ricardo T. F. Numa\source\repos\Pong_CPP_Windows\Pong_CPP_Windows\renderer.cpp(60,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+C:\Users\Ricardo T. F. Numa\source\repos\Pong_CPP_Windows\Pong_CPP_Windows\renderer.cpp(61,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+C:\Users\Ricardo T. F. Numa\source\repos\Pong_CPP_Windows\Pong_CPP_Windows\game.cpp(154,61): warning C4305: 'argumento': truncamento de 'double' para 'float'
+  Pong_CPP_Windows.vcxproj -> C:\Users\Ricardo T. F. Numa\source\repos\Pong_CPP_Windows\x64\Debug\Pong_CPP_Windows.exe
