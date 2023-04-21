@@ -6,6 +6,7 @@ float player_1_p, player_1_dp, player_2_p, player_2_dp;
 float arena_half_size_x = 85, arena_half_size_y = 45;
 float player_half_size_x = 2.5, player_half_size_y = 12;
 float ball_p_x, ball_p_y, ball_dp_x = 130, ball_dp_y, ball_half_size = 1;
+float initial_ball_speed = 1.f, ball_speed = initial_ball_speed, ball_speed_increment = 2.f, maximum_ball_speed = 33.f;
 
 int player_1_score, player_2_score;
 
@@ -51,6 +52,7 @@ simulate_game(Input* input, float dt) {
 	draw_arena_borders(arena_half_size_x, arena_half_size_y, 0xff5500);
 
 	if (current_gamemode == GM_GAMEPLAY) {
+
 		float player_1_ddp = 0.f;
 
 		if (!enemy_is_ai) {
@@ -68,6 +70,7 @@ simulate_game(Input* input, float dt) {
 		if (is_down(BUTTON_W)) player_2_ddp += 2000;
 		if (is_down(BUTTON_S)) player_2_ddp -= 2000;
 
+		player_half_size_y = 12 * (1 + ball_speed / 100);
 		simulate_player(&player_1_p, &player_1_dp, player_1_ddp, dt);
 		simulate_player(&player_2_p, &player_2_dp, player_2_ddp, dt);
 
@@ -79,13 +82,30 @@ simulate_game(Input* input, float dt) {
 
 			if (aabb_vs_aabb(ball_p_x, ball_p_y, ball_half_size, ball_half_size, 80, player_1_p, player_half_size_x, player_half_size_y)) {
 				ball_p_x = 80 - player_half_size_x - ball_half_size;
+				if (ball_speed < maximum_ball_speed) {
+					ball_speed *= ball_speed_increment;
+					if (ball_dp_x > 0) {
+						ball_dp_x += ball_speed;
+					} else {
+						ball_dp_x -= ball_speed;
+					}
+				}
 				ball_dp_x *= -1;
-				ball_dp_y = (ball_p_y - player_1_p) * 2 + player_1_dp * .75f;
+				ball_dp_y = (ball_p_y - player_1_p) * 2 + player_1_dp;
 			}
 			else if (aabb_vs_aabb(ball_p_x, ball_p_y, ball_half_size, ball_half_size, -80, player_2_p, player_half_size_x, player_half_size_y)) {
 				ball_p_x = -80 + player_half_size_x + ball_half_size;
+				if (ball_speed < maximum_ball_speed) {
+					ball_speed *= ball_speed_increment;
+					if (ball_dp_x > 0) {
+						ball_dp_x += ball_speed;
+					}
+					else {
+						ball_dp_x -= ball_speed;
+					}
+				}
 				ball_dp_x *= -1;
-				ball_dp_y = (ball_p_y - player_2_p) * 2 + player_2_dp * .75f;
+				ball_dp_y = (ball_p_y - player_2_p) * 2 + player_2_dp;
 			}
 
 			if (ball_p_y + ball_half_size > arena_half_size_y) {
@@ -103,6 +123,9 @@ simulate_game(Input* input, float dt) {
 				ball_p_x = 0;
 				ball_p_y = 0;
 				player_1_score++;
+				ball_speed = initial_ball_speed;
+				ball_dp_x = 130;
+				player_half_size_y = 12;
 			}
 			else if (ball_p_x - ball_half_size < -arena_half_size_x) {
 				ball_dp_x *= -1;
@@ -110,6 +133,9 @@ simulate_game(Input* input, float dt) {
 				ball_p_x = 0;
 				ball_p_y = 0;
 				player_2_score++;
+				ball_speed = initial_ball_speed;
+				ball_dp_x = 130;
+				player_half_size_y = 12;
 			}
 		}
 
@@ -150,4 +176,6 @@ simulate_game(Input* input, float dt) {
 		draw_text("YOUTUBE.COM/DANZAIDAN", -73, 15, 1.22, 0xffffff);
 
 	}
+
+	if (GetAsyncKeyState(VK_ESCAPE) != 0) running = false;
 }
