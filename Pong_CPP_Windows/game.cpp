@@ -48,8 +48,8 @@ bool enemy_is_ai;
 
 internal void
 simulate_game(Input* input, float dt) {
-	draw_rect(0, 0, arena_half_size_x, arena_half_size_y, 0xffaa33);
-	draw_arena_borders(arena_half_size_x, arena_half_size_y, 0xff5500);
+	draw_rect(0, 0, arena_half_size_x, arena_half_size_y, 0x000000);
+	draw_arena_borders(arena_half_size_x, arena_half_size_y, 0xffffff);
 
 	if (current_gamemode == GM_GAMEPLAY) {
 
@@ -140,14 +140,14 @@ simulate_game(Input* input, float dt) {
 		}
 
 
-		draw_number(player_1_score, -10, 40, 1.f, 0xbbffbb);
-		draw_number(player_2_score, 10, 40, 1.f, 0xbbffbb);
+		draw_number(player_1_score, -10, 40, 1.f, 0xffffff);
+		draw_number(player_2_score, 10, 40, 1.f, 0xffffff);
 
 		// Rendering
 		draw_rect(ball_p_x, ball_p_y, ball_half_size, ball_half_size, 0xffffff);
 
-		draw_rect(80, player_1_p, player_half_size_x, player_half_size_y, 0xff0000);
-		draw_rect(-80, player_2_p, player_half_size_x, player_half_size_y, 0xff0000);
+		draw_rect(80, player_1_p, player_half_size_x, player_half_size_y, 0xffffff);
+		draw_rect(-80, player_2_p, player_half_size_x, player_half_size_y, 0xffffff);
 
 	} else {
 
@@ -163,17 +163,15 @@ simulate_game(Input* input, float dt) {
 		}
 
 		if (hot_button == 0) {
-			draw_text("SINGLE PLAYER", -80, -10, 1, 0xff0000);
-			draw_text("MULTIPLAYER", 20, -10, 1, 0xaaaaaa);
+			draw_text("SINGLE PLAYER", -75, 0, 1, 0xff0000);
+			draw_text("MULTIPLAYER", 10, 0, 1, 0xffffff);
 		}
 		else {
-			draw_text("SINGLE PLAYER", -80, -10, 1, 0xaaaaaa);
-			draw_text("MULTIPLAYER", 20, -10, 1, 0xff0000);
+			draw_text("SINGLE PLAYER", -75, 0, 1, 0xffffff);
+			draw_text("MULTIPLAYER", 10, 0, 1, 0xff0000);
 		}
 
-		draw_text("PONG TUTORIAL", -73, 40, 2, 0xffffff);
-		draw_text("WATCH THE STEP BY STEP TUTORIAL ON", -73, 22, .75, 0xffffff);
-		draw_text("YOUTUBE.COM/DANZAIDAN", -73, 15, 1.22, 0xffffff);
+		draw_text("PONG", -20, 30, 2, 0xffffff);
 
 	}
 
